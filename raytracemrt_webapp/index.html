@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./assets/css/webapp.css" />
+    <script src="/mini-coi.js"></script>
+    <script type="module">
+        const loading = document.getElementById('loading');
+        addEventListener('py:ready', () => loading.close());
+        loading.showModal();
+    </script>
+    <title>Ray Tracing</title>
+    <!-- Recommended meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!-- PyScript CSS -->
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.11.1/core.css">
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.181.2/build/three.module.js",
+          "three/examples/jsm/controls/OrbitControls.js":
+            "https://cdn.jsdelivr.net/npm/three@0.181.2/examples/jsm/controls/OrbitControls.js"
+        }
+      }
+    </script>
+    <script type="module">
+        import * as THREE from "three";
+        import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+
+        globalThis.THREE = THREE;
+        globalThis.OrbitControls = OrbitControls;
+    </script>
+    <!-- This script tag bootstraps PyScript -->
+    <script type="module" src="https://pyscript.net/releases/2025.11.1/core.js"></script>
+</head>
+<!-- <body style="margin: 0">
+    
+    <div>
+      
+    </div>
+    
+</body> -->
+<body>
+    <dialog id="loading">
+      <h1>Loading...</h1>
+    </dialog>
+    <div class="split left">
+      <!-- <label for="Upload File">Point Cloud File (.ply)</label>
+      <input type="file" id="pts-file-upload">
+      <button id="pts-submit">Submit File</button>
+      <label id="pts-output">No file uploaded</label> -->
+      <label for="fileInput">Choose a file:</label>
+      <input type="file" id="fileInput">
+    </div>
+
+    <div class="split right" id="rightSide"></div>
+    <script type="py" src="./main.py" config="./pyscript.toml"></script>
+</body>
+</html>

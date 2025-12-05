@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Container split into two halves */
+.split {
+    height: 100vh; /* Full screen height */
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left {
+    width: 20%;
+    left: 0;
+    background-color: #f2f2f2;
+}
+
+.right {
+    width: 80%;
+    right: 0;
+    background-color: #cccccc;
+}
+
+h1 {
+    color: #333;
+}
+
+#loading { 
+    outline: none; 
+    border: none; 
+    background-color: rgba(255, 255, 255, 0.9); 
+    z-index: 9999; position: relative; 
+}
