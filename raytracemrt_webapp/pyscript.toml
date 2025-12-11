@@ -1,10 +1,9 @@
 name = "Ray Tracing"
-packages = ["plyfile>=1.1.3"]
-
-[files]
-"./libthree.py" = ""
+packages = ["plyfile>=1.1.3", "geomie3d==0.0.11", "numpy-stl>=3.2.0",
+            "./lib/pyscript_3dapp_lib-0.0.2-py3-none-any.whl", 
+            "./lib/raytrace_mrt_lib-0.0.2-py3-none-any.whl"]
 
 [js_modules.main]
-"https://unpkg.com/three@v0.149.0/build/three.module.js" = "three"
-"https://unpkg.com/three@v0.149.0/examples/jsm/controls/TrackballControls.js" = "tc"
-"https://cdnjs.cloudflare.com/ajax/libs/stats.js/r17/Stats.min.js" = "stats"
+"https://cdn.jsdelivr.net/npm/three@0.181.2/build/three.module.js" = "three"
+"https://cdn.jsdelivr.net/npm/three@0.181.2/examples/jsm/controls/OrbitControls.js" = "oc"
+"https://cdn.jsdelivr.net/npm/three@0.181.2/examples/jsm/utils/BufferGeometryUtils.js" = "bg"

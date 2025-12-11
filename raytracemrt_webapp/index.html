@@ -1,59 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- import the threejs modules here for pyscript -->
     <link rel="stylesheet" href="./assets/css/webapp.css" />
-    <script src="/mini-coi.js"></script>
+    <!-- <script src="/mini-coi.js"></script> -->
     <script type="module">
         const loading = document.getElementById('loading');
         addEventListener('py:ready', () => loading.close());
         loading.showModal();
     </script>
-    <title>Ray Tracing</title>
+    <title>Ray Trace MRT Calculation</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.181.2/build/three.module.js"
+        }
+      }
+    </script>
     <!-- Recommended meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!-- PyScript CSS -->
     <link rel="stylesheet" href="https://pyscript.net/releases/2025.11.1/core.css">
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.181.2/build/three.module.js",
-          "three/examples/jsm/controls/OrbitControls.js":
-            "https://cdn.jsdelivr.net/npm/three@0.181.2/examples/jsm/controls/OrbitControls.js"
-        }
-      }
-    </script>
-    <script type="module">
-        import * as THREE from "three";
-        import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-
-        globalThis.THREE = THREE;
-        globalThis.OrbitControls = OrbitControls;
-    </script>
     <!-- This script tag bootstraps PyScript -->
     <script type="module" src="https://pyscript.net/releases/2025.11.1/core.js"></script>
 </head>
-<!-- <body style="margin: 0">
-    
-    <div>
-      
-    </div>
-    
-</body> -->
 <body>
     <dialog id="loading">
       <h1>Loading...</h1>
+      <p id="dialogText"></p>
     </dialog>
-    <div class="split left">
-      <!-- <label for="Upload File">Point Cloud File (.ply)</label>
-      <input type="file" id="pts-file-upload">
-      <button id="pts-submit">Submit File</button>
-      <label id="pts-output">No file uploaded</label> -->
-      <label for="fileInput">Choose a file:</label>
-      <input type="file" id="fileInput">
+    <div class="container">
+      <div class="top">
+        <h1>Calculate MRT Using Ray Tracing with a PLY Point Cloud (v0.0.1) (<a href="https://globalenvtech.github.io/get_manuals/raytrace-mrt/" target="_blank">User Manual</a>) (Only use Chromium-based browser e.g. Chrome, Edge ...)</h1>
+        <div>
+          <label for="Upload File">Projected Point Cloud with Surface Temperature (.ply)</label>
+          <input type="file" id="stpts-file-upload">
+        </div>
+        <div>
+          <label for="vdim_label">Voxel Dimensions (meter)</label>
+          <input id="vdim" type="number" placeholder="X coordinate..." step="0.1" value="0.1">
+        </div>
+        <div>
+          <label for="Upload File">MRT Grid File (.csv)</label>
+          <input type="file" id="grid-file-upload">
+          <label for="nray_label">Number of Rays per Grid Point</label>
+          <input id="nray" type="number" placeholder="nrays ..." step="10" value="100">
+        </div>
+        <div>
+          <button id="stcsv-submit">Calculate MRT</button>
+          <label id="stcsv-output"></label>
+        </div>
+        <div>
+          <button id="mrt-download">Download MRT (.csv)</button>
+          <label id="mrt-output"></label>
+        </div>
+        <div>
+          <button id="viz_pts">Visualize Original Point Cloud</button>
+        </div>
+        <div>
+          <label for="grid_label"> Visualize rays of grid point #</label>
+          <input id="grid_id" type="number" placeholder="grid # ..." step="1" value="1" min="1">
+          <button id="viz_rays">Visualize Rays</button>
+        </div>
+      </div>
+      <div class="bottom" id="bottomSide">
+        <div class="falsecolor-legend">
+          <div class="legend-title">Temperatures</div>
+          <div class="legend-bar"></div>
+          <div class="legend-labels">
+            <span id = 'fcval5'>1.0</span>
+            <span id = 'fcval4'>0.75</span>
+            <span id = 'fcval3'>0.5</span>
+            <span id = 'fcval2'>0.25</span>
+            <span id = 'fcval1'>0.0</span>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div class="split right" id="rightSide"></div>
     <script type="py" src="./main.py" config="./pyscript.toml"></script>
 </body>
 </html>

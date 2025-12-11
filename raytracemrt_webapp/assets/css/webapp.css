@@ -1,31 +1,30 @@
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
+   margin: 0;
+    padding: 0;
 }
 
-/* Container split into two halves */
-.split {
-    height: 100vh; /* Full screen height */
-    position: fixed;
-    top: 0;
+.container {
     display: flex;
+    flex-direction: column; /* vertical layout */
+    height: 100vh;;
+    width: 100vw;
+}
+
+.top {
+    height: 20%;
+    flex-grow: 1;
     justify-content: center;
     align-items: center;
-}
-
-.left {
-    width: 20%;
-    left: 0;
     background-color: #f2f2f2;
 }
 
-.right {
-    width: 80%;
-    right: 0;
+.bottom {
+    height: 80%;
     background-color: #cccccc;
 }
 
 h1 {
+    font-size: 16px;
     color: #333;
 }
 
@@ -34,4 +33,56 @@ h1 {
     border: none; 
     background-color: rgba(255, 255, 255, 0.9); 
     z-index: 9999; position: relative; 
+}
+
+/* Position in the corner */
+.falsecolor-legend {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 40px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+  z-index: 9999;
+}
+
+/* Title */
+.falsecolor-legend .legend-title {
+  font-size: 12px;
+  margin-bottom: 8px;
+  text-align: center;
+  color: #fff;
+}
+
+/* Vertical color bar */
+.falsecolor-legend .legend-bar {
+  flex: 1;
+  border-radius: 4px;
+  background: linear-gradient(
+    to top,
+    #0000ff,  /* blue (low) */
+    #00ffff,
+    #00ff00,
+    #ffff00,
+    #ff0000   /* red (high) */
+  );
+  border: 1px solid #aaa;
+}
+
+/* Labels */
+.falsecolor-legend .legend-labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 200px;
+  position: absolute;
+  right: 50px;
+  top: 20px;
+}
+
+.falsecolor-legend .legend-labels span {
+  font-size: 11px;
+  color: #fff;
 }
