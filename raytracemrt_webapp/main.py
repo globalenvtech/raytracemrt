@@ -306,14 +306,16 @@ def viz_rays(*args):
     grid_pt = grid_pts[grid_id-1]
     grid_rays = rays[grid_id-1]
     grid_ms_rays = ms_rays[grid_id-1]
+    nms_rays = len(grid_ms_rays)
     if RAYS_ON == None:
         threejs_lines = viz_a_grid_rays(grid_pt, grid_rays, [1,0,0])
         threejs_lines.name = f"grid_rays{grid_id}"
-        three_js_lines_ms = viz_a_grid_rays(grid_pt, grid_ms_rays, [1,1,1])
-        three_js_lines_ms.name = f"grid_ms_rays{grid_id}"
-        RAYS_ON = grid_id
         scene.add(threejs_lines)
-        scene.add(three_js_lines_ms)
+        if  nms_rays != 0:
+            three_js_lines_ms = viz_a_grid_rays(grid_pt, grid_ms_rays, [1,1,1])
+            three_js_lines_ms.name = f"grid_ms_rays{grid_id}"
+            scene.add(three_js_lines_ms)
+        RAYS_ON = grid_id
     else:
         three_js_lines = scene.getObjectByName(f"grid_rays{RAYS_ON}", True)
         three_js_lines_ms = scene.getObjectByName( f"grid_ms_rays{RAYS_ON}", True)
@@ -322,11 +324,12 @@ def viz_rays(*args):
         if grid_id != RAYS_ON:
             threejs_lines = viz_a_grid_rays(grid_pt, grid_rays, [1,0,0])
             threejs_lines.name = f"grid_rays{grid_id}"
-            three_js_lines_ms = viz_a_grid_rays(grid_pt, grid_ms_rays, [1,1,1])
-            three_js_lines_ms.name = f"grid_ms_rays{grid_id}"
-            RAYS_ON = grid_id
             scene.add(threejs_lines)
-            scene.add(three_js_lines_ms)
+            if nms_rays != 0:
+                three_js_lines_ms = viz_a_grid_rays(grid_pt, grid_ms_rays, [1,1,1])
+                three_js_lines_ms.name = f"grid_ms_rays{grid_id}"
+                scene.add(three_js_lines_ms)
+            RAYS_ON = grid_id
         else:
             RAYS_ON = None
 
