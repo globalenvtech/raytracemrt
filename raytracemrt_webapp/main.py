@@ -311,7 +311,7 @@ def viz_rays(*args):
         threejs_lines = viz_a_grid_rays(grid_pt, grid_rays, [1,0,0])
         threejs_lines.name = f"grid_rays{grid_id}"
         scene.add(threejs_lines)
-        if  nms_rays != 0:
+        if nms_rays != 0:
             three_js_lines_ms = viz_a_grid_rays(grid_pt, grid_ms_rays, [1,1,1])
             three_js_lines_ms.name = f"grid_ms_rays{grid_id}"
             scene.add(three_js_lines_ms)

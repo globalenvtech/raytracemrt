@@ -126,6 +126,8 @@ def calc_mrt(ply_bytes: bytes, grid_bytes: bytes, vdim: float, nrays: int) -> di
     
     if nparallel != 0:
         rays_ls = separate_rays(rays, nparallel)
+    else:
+        rays_ls = [rays]
     # endregion: read csv file and convert them into rays for projection
     #------------------------------------------------------------------
     # region: project the rays onto the bboxes
